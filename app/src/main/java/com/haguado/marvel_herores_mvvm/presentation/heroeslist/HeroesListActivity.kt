@@ -1,7 +1,8 @@
-package com.haguado.marvel_herores_mvvm
+package com.haguado.marvel_herores_mvvm.presentation.heroeslist
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.haguado.marvel_herores_mvvm.R
 
 class HeroesListActivity : AppCompatActivity() {
 
