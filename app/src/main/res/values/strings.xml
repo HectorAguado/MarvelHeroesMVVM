@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Marvel-Herores-MVVM</string>
+
+    <!-- Animations -->
+    <string name="image_transition">imageTransition</string>
+
 </resources>
