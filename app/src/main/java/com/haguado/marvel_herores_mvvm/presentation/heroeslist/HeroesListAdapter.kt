@@ -2,13 +2,20 @@ package com.haguado.marvel_herores_mvvm.presentation.heroeslist
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.support.v7.graphics.Palette
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.haguado.marvel_herores_mvvm.R
 import com.haguado.marvel_herores_mvvm.data.model.MarvelHeroEntity
+import kotlinx.android.synthetic.main.item_hero.view.*
 
 typealias Click = (MarvelHeroEntity, ImageView) -> Unit
 
