@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+// para que funcione Room, Dagger
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -36,6 +39,8 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     // Google Gson
     implementation 'com.google.code.gson:gson:2.8.2'
+    // ViewModelProviders
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
     // RxJava
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.14'  //2.1.10
@@ -47,7 +52,10 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     // Palette
-    implementation 'com.android.support:palette-v7:27.1.0'
+    implementation 'com.android.support:palette-v7:27.1.1'
+    // Dagger 2
+    implementation 'com.google.dagger:dagger:2.13'
+    kapt 'com.google.dagger:dagger-compiler:2.13'
 
 
     // Tests

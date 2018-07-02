@@ -1,4 +1,4 @@
-package com.haguado.marvel_herores_mvvm.presentation.util
+package com.haguado.marvel_herores_mvvm.util
 
 import android.content.Context
 import android.util.AttributeSet
