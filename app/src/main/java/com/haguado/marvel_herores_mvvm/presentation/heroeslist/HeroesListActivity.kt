@@ -34,6 +34,7 @@ class HeroesListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heroes_list)
         setUpRecycler()
+        setUpViewModel()
     }
 
     private fun setUpRecycler() {
