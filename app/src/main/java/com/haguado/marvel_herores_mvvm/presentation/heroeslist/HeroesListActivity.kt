@@ -11,10 +11,14 @@ import android.view.View
 import com.haguado.marvel_herores_mvvm.R
 import com.haguado.marvel_herores_mvvm.data.model.MarvelHeroEntity
 import com.haguado.marvel_herores_mvvm.presentation.MainApp
+import com.haguado.marvel_herores_mvvm.util.Navigator
 import kotlinx.android.synthetic.main.activity_heroes_list.*
 import javax.inject.Inject
 
 class HeroesListActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -22,7 +26,7 @@ class HeroesListActivity : AppCompatActivity() {
     lateinit var heroesListViewModel: HeroesListViewModel
 
     private val adapter = HeroesListAdapter{ hero, image ->
-        onHeroClicked(hero)  //TODO
+        onHeroClicked(hero, image)
     }
 
     fun inject(){
@@ -72,7 +76,7 @@ class HeroesListActivity : AppCompatActivity() {
         heroesListLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun onHeroClicked(marvelHeroEntity: MarvelHeroEntity){
-
+    private fun onHeroClicked(marvelHeroEntity: MarvelHeroEntity, image: View){
+        navigator.goToHeroDetail(this, marvelHeroEntity, image)
     }
 }
