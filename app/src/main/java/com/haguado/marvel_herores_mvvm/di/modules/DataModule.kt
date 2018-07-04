@@ -1,8 +1,12 @@
 package com.haguado.marvel_herores_mvvm.di.modules
 
+import android.arch.persistence.room.Room
+import android.content.Context
+import com.haguado.marvel_herores_mvvm.data.db.HeroDatabase
 import com.haguado.marvel_herores_mvvm.data.mapper.MarvelHeroMapper
 import com.haguado.marvel_herores_mvvm.data.net.MarvelHeroesService
 import com.haguado.marvel_herores_mvvm.data.repository.MarvelHeroesRepository
+import com.haguado.marvel_herores_mvvm.data.repository.datasource.LocalMarvelHeroesDataSource
 import com.haguado.marvel_herores_mvvm.data.repository.datasource.RemoteMarvelHeroesDataSource
 import dagger.Module
 import dagger.Provides
@@ -13,11 +17,22 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideMarvelHeroMapper(): MarvelHeroMapper = MarvelHeroMapper()
+    fun provideMarvelHeroEntityMapper(): MarvelHeroMapper = MarvelHeroMapper()
 
     @Provides
     @Singleton
-    fun provideRemoteMarvelHeroesDataSoruce(
+    fun provideDataBase(context: Context): HeroDatabase =
+            Room.databaseBuilder(context, HeroDatabase::class.java, "heroes.db").build()
+
+    @Provides
+    @Singleton
+    fun provideLocalMarvelHeroesDataSource(heroDatabase: HeroDatabase): LocalMarvelHeroesDataSource =
+            LocalMarvelHeroesDataSource(heroDatabase)
+
+
+    @Provides
+    @Singleton
+    fun provideRemoteMarvelHeroesDataSource(
             marvelHeroesService: MarvelHeroesService,
             marvelHeroMapper: MarvelHeroMapper
         ): RemoteMarvelHeroesDataSource =
@@ -26,9 +41,10 @@ class DataModule {
     @Provides
     @Singleton
     fun provideMarvelHeroesRepository(
-            marvelRemoteMarvelHeroesDataSource: RemoteMarvelHeroesDataSource
+            localMarvelHeroesDataSource: LocalMarvelHeroesDataSource,
+            remoteMarvelHeroesDataSource: RemoteMarvelHeroesDataSource
     ): MarvelHeroesRepository =
-            MarvelHeroesRepository(marvelRemoteMarvelHeroesDataSource)
+            MarvelHeroesRepository(localMarvelHeroesDataSource,remoteMarvelHeroesDataSource)
 
 
 }

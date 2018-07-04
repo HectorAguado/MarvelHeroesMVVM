@@ -1,0 +1,24 @@
+package com.haguado.marvel_herores_mvvm.data.db
+
+import android.arch.persistence.room.*
+import com.haguado.marvel_herores_mvvm.data.model.MarvelHeroEntity
+import io.reactivex.Maybe
+
+@Dao
+abstract class HeroDao {
+
+    @Query("SELECT * FROM heroes")
+    abstract fun getAllHeroes(): Maybe<List<MarvelHeroEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insertAll(heroes: List<MarvelHeroEntity>)
+
+    @Query("DELETE FROM heroes")
+    abstract fun deleteAllHeroes()
+
+    @Transaction
+    open fun removeAndInsertHeroes(heroes: List<MarvelHeroEntity>){
+        deleteAllHeroes()
+        insertAll(heroes)
+    }
+}
